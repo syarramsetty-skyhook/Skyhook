@@ -1,10 +1,10 @@
 # TrueFix
 
-The TrueFix libray allows you to easily integrate with [Skyhook's TrueFix®](http://www.trueposition.com/products/truefix-platform) platform, which enables secure, privaten location services.
+The TrueFix libray allows you to easily integrate with [Skyhook's TrueFix®](http://www.trueposition.com/products/truefix-platform) platform, which enables secure, private location services.
 
-To use this library you must require and instantiate TrueFix in both the agent and device code.
+To use this library you must require and instantiate TrueFix on both the *agent* and *device*.
 
-**To add this library to your project, add `#require "TrueFix.device.nut:1.0.0"` to the top of your device code, and add `#require "TrueFix.agent.nut:1.0.0"` to the top of your agent code.**
+**To add this library to your project, add `#require "TrueFix.device.nut:1.0.0"` to the top of your device code, and `#require "TrueFix.agent.nut:1.0.0"` to the top of your agent code.**
 
 -----------------------------------------------
 
@@ -36,11 +36,11 @@ The *TrueFix* agent side library expects the device side *TrueFix* library to be
 
 ### Constructor: TrueFix(*deviceName, truefixKey, truefixUrl*)
 
-The agent side TrueFix constructor takes three required parameters: the deviceName, TrueFix Key, and TrueFix Location Platform Url.  All parameters are strings.  To get the TrueFix Key and Location Platform Url please contact TruePosition.
+The agent side TrueFix constructor takes three required parameters: the deviceName, TrueFix Key, and TrueFix Location Platform Url.  All parameters are strings.  To get the TrueFix Key and Location Platform Url please contact Skyhook.
 
 ```squirrel
 const devName = "tf-imp-1";
-const trueFixKey = "TrueFix-Key-From-TruePosition-Dot-Com";
+const trueFixKey = "TrueFix-Key-From-Skyhook-Dot-Com";
 const trueFixUrl = "https://trueposition.truefix.com/location";
 
 trueFixAgent <- TrueFix(devName, trueFixKey, trueFixUrl);
@@ -50,7 +50,7 @@ trueFixAgent <- TrueFix(devName, trueFixKey, trueFixUrl);
 
 ### get_location(callback)
 
-The *get_location* method takes one required parameter: a callback function.  The method runs a wifi scan on the device, then sends the results to TrueFix.  TrueFix then returns the location and passes the results to the callback.
+The *get_location* method takes one required parameter: a callback function.  This method runs a wifi scan on the device, then sends the results to TrueFix.  TrueFix returns the device's location and passes the results to the callback.
 
 The callback takes two required parameters: err, and result.  If no errors were encountered, err will be null and the result will contain a table with keys *latitude*, *longitude* and *accuracy*. If an error occured during the request, err will contain the error information and result will be null or the raw response from TrueFix.
 
@@ -86,7 +86,7 @@ tfDevApi.register();
 const tfDevName = "tf-imp-1";
 
 // truefix auth key
-const tfKey = "TrueFix-Key-From-TruePosition-Dot-Com";
+const tfKey = "TrueFix-Key-From-Skyhook-Dot-Com";
 
 // truefix Url
 const tfUrl = "https://trueposition.truefix.com/location";
