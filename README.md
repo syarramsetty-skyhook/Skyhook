@@ -30,7 +30,7 @@ trueFixDevice.register();
 
 ## Agent Class Usage
 
-**Note** The TrueFix agent library code expects the device side library to be instantiated.skyhook
+**Note** The TrueFix agent library code expects the device side library to be instantiated.
 
 ### Constructor: TrueFix(*deviceName, truefixKey, truefixUrl*)
 
