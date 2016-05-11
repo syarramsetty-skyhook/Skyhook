@@ -1,12 +1,10 @@
 # TrueFix
 
-The TrueFix libray allows you to easily integrate with [Skyhook's TrueFix®](http://www.trueposition.com/products/truefix-platform) platform, which enables secure, private location services.
+The TrueFix library allows you to easily integrate [Skyhook’s TrueFix®](http://www.trueposition.com/products/truefix-platform) platform, which enables secure, private location services.
 
-To use this library you must require and instantiate TrueFix on both the *agent* and *device*.
+To use this library you must require and instantiate TrueFix on both the agent **and** the device.
 
-**To add this library to your project, add `#require "TrueFix.device.nut:1.0.0"` to the top of your device code, and `#require "TrueFix.agent.nut:1.0.0"` to the top of your agent code.**
-
------------------------------------------------
+**To add this library to your project, add** `#require "TrueFix.device.nut:1.0.0"` **to the top of your device code, and** `#require "TrueFix.agent.nut:1.0.0"` **to the top of your agent code.**
 
 ## Device Class Usage
 
@@ -15,6 +13,8 @@ To use this library you must require and instantiate TrueFix on both the *agent*
 The device side TrueFix constructor takes no parameters.
 
 ```squirrel
+#require "TrueFix.device.nut:1.0.0"
+
 trueFixDevice <- TrueFix();
 ```
 
@@ -22,89 +22,93 @@ trueFixDevice <- TrueFix();
 
 ### register()
 
-The *register* method opens a listener for location requests from the agent.  When a request is received the device scans the wifi networks and sends the result back to the agent.
+The *register()* method opens a listener for location requests from the agent. When a request is received, the device scans the WiFi networks and sends the result back to the agent.
 
 ```squirrel
 trueFixDevice.register();
 ```
 
------------------------------------------------
-
 ## Agent Class Usage
 
-The *TrueFix* agent side library expects the device side *TrueFix* library to be initialized.
+**Note** The TrueFix agent library code expects the device side library to be instantiated.skyhook
 
 ### Constructor: TrueFix(*deviceName, truefixKey, truefixUrl*)
 
-The agent side TrueFix constructor takes three required parameters: the deviceName, TrueFix Key, and TrueFix Location Platform Url.  All parameters are strings.  To get the TrueFix Key and Location Platform Url please contact Skyhook.
+The agent side TrueFix constructor takes three required parameters: the device name, your TrueFix Key and the TrueFix Location Platform URL. All parameters are strings. To get your TrueFix Key and Location Platform URL please contact [Skyhook](http://www.skyhookwireless.com/developers).
 
 ```squirrel
-const devName = "tf-imp-1";
-const trueFixKey = "TrueFix-Key-From-Skyhook-Dot-Com";
-const trueFixUrl = "https://trueposition.truefix.com/location";
+#require "TrueFix.agent.nut:1.0.0"
 
-trueFixAgent <- TrueFix(devName, trueFixKey, trueFixUrl);
+const DEV_NAME = "tf-imp-1";
+const TRUEFIX_KEY = "<YOUR_TRUEFIX_KEY_FROM_SKYHOOK_DOT_COM>";
+const TRUEFIX_URL = "https://trueposition.truefix.com/location";
+
+trueFixAgent <- TrueFix(DEV_NAME, TRUEFIX_KEY, TRUEFIX_URL);
 ```
 
 ## Agent Class Methods
 
-### get_location(callback)
+### get_location(*callback*)
 
-The *get_location* method takes one required parameter: a callback function.  This method runs a wifi scan on the device, then sends the results to TrueFix.  TrueFix returns the device's location and passes the results to the callback.
+The *get_location()* method takes one required parameter: a callback function. The method triggers a WiFi scan on the device then sends the results to TrueFix. TrueFix returns the device’s location and passes the results to the callback.
 
-The callback takes two required parameters: err, and result.  If no errors were encountered, err will be null and the result will contain a table with keys *latitude*, *longitude* and *accuracy*. If an error occured during the request, err will contain the error information and result will be null or the raw response from TrueFix.
+The callback takes two required parameters: *err* and *result*. If no errors were encountered, *err* will be null and *result* will contain a table with the keys *latitude*, *longitude* and *accuracy*. If an error occured during the request, *err* will contain the error information and *result* will be null or the raw response from TrueFix.
 
 ```squirrel
-trueFixAgent.get_location(function(err, res) {
-      if (err) {
-        server.log(err);
-      } else {
-        server.log("location=" + http.jsonencode(res));
-      }
+trueFixAgent.get_location(function(err, result) {
+    if (err) {
+        server.error(err);
+    } else {
+        local location = http.jsondecode(result);
+        server.log("Device location: " + location.longitude + ", " + location.latitude);
+        server.log("Location accuracy: " + location.accuracy);
+    }
 });
 ```
 
---------
+## Full Example
 
-##Full Example:
+### Device Code
 
-###Device Code:
-
-```squirrel
+```
 #require "TrueFix.device.nut:1.0.0";
 
 tfDevApi <- TrueFix();
 tfDevApi.register();
 ```
 
-###Agent Code:
+### Agent Code
 
-```squirrel
+```
 #require "TrueFix.agent.nut:1.0.0";
 
-// device name
+// Device name
 const tfDevName = "tf-imp-1";
 
-// truefix auth key
+// Truefix auth key
 const tfKey = "TrueFix-Key-From-Skyhook-Dot-Com";
 
-// truefix Url
+// Truefix URL
 const tfUrl = "https://trueposition.truefix.com/location";
 
-// create TrueFix instance
+// Create TrueFix instance
 tfAgentApi <- TrueFix(tfDevName, tfKey, tfUrl);
 
-function get_my_device_location(err, fix) {
-  if (err) {
-    server.log(err);
-  } else {
-    server.log("location=" + http.jsonencode(fix));
-  }
+function getMyDeviceLocation(err, fix) {
+    if (err) {
+        server.error(err);
+    } else {
+       server.log("location=" + http.jsonencode(fix));
+    }
 }
 
-// wait for device to come online then get location
-imp.wakeup(0.5, function() {
-    server.log("getting location")
-    tfAgentApi.get_location(get_my_device_location);
+// Wait for device to come online then get location
+imp.wakeup(1.0, function() {
+    server.log("Detting location");
+    tfAgentApi.get_location(getMyDeviceLocation);
 })
 ```
+
+## Copyright
+
+The Truefix library is copyright &copy; 2016, TruePosition.
