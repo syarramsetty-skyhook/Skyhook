@@ -98,7 +98,8 @@ function getMyDeviceLocation(err, fix) {
     if (err) {
         server.error(err);
     } else {
-       server.log("location=" + http.jsonencode(fix));
+        local location = http.jsondecode(fix);
+        server.log("Device location: " + location.longitude + ", " + location.latitude);
     }
 }
 
