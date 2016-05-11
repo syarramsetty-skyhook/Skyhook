@@ -110,6 +110,6 @@ imp.wakeup(1.0, function() {
 })
 ```
 
-## Copyright
+## License
 
-The Truefix library is copyright &copy; 2016, TruePosition.
+The Truefix library is copyright &copy; 2016, TruePosition. It is released under the [MIT licence](https://github.com/electricimp/TrueFix/blob/master/LICENSE).
