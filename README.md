@@ -59,9 +59,8 @@ trueFixAgent.get_location(function(err, result) {
     if (err) {
         server.error(err);
     } else {
-        local location = http.jsondecode(result);
-        server.log("Device location: " + location.longitude + ", " + location.latitude);
-        server.log("Location accuracy: " + location.accuracy);
+        server.log("Device location: " + result.longitude + ", " + result.latitude);
+        server.log("Location accuracy: " + result.accuracy);
     }
 });
 ```
@@ -98,8 +97,8 @@ function getMyDeviceLocation(err, fix) {
     if (err) {
         server.error(err);
     } else {
-        local location = http.jsondecode(fix);
-        server.log("Device location: " + location.longitude + ", " + location.latitude);
+        server.log("Device location: " + fix.longitude + ", " + fix.latitude);
+        server.log("Location accuracy: " + fix.accuracy);    
     }
 }
 
