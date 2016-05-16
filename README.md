@@ -34,7 +34,7 @@ trueFixDevice.register();
 
 ### Constructor: TrueFix(*deviceName, truefixKey, truefixUrl*)
 
-The agent side TrueFix constructor takes three required parameters: the device name, your TrueFix Key and the TrueFix Location Platform URL. All parameters are strings. To get your TrueFix Key and Location Platform URL please contact [Skyhook](http://www.skyhookwireless.com/developers).
+The agent side TrueFix constructor takes three required parameters: the device name, your TrueFix Key and the TrueFix Location Platform URL. All parameters are strings. To get your TrueFix Key and Location Platform URL please contact [Skyhook](http://www.skyhookwireless.com/try-skyhook-for-free).
 
 ```squirrel
 #require "TrueFix.agent.nut:1.0.0"
