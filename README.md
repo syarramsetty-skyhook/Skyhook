@@ -41,7 +41,7 @@ The agent side TrueFix constructor takes three required parameters: the device n
 
 const DEV_NAME = "tf-imp-1";
 const TRUEFIX_KEY = "<YOUR_TRUEFIX_KEY_FROM_SKYHOOK_DOT_COM>";
-const TRUEFIX_URL = "https://trueposition.truefix.com/location";
+const TRUEFIX_URL = "<Contact Skyhook to get truefixUrl>";
 
 trueFixAgent <- TrueFix(DEV_NAME, TRUEFIX_KEY, TRUEFIX_URL);
 ```
