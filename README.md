@@ -1,6 +1,6 @@
 # TrueFix
 
-The TrueFix library allows you to easily integrate [Skyhook’s TrueFix®](http://www.trueposition.com/products/truefix-platform) platform, which enables secure, private location services.
+The TrueFix library allows you to easily integrate [Skyhook’s TrueFix® Precision Location ](http://www.skyhookwireless.com/products/precision-location) platform, which enables secure, private location services.
 
 To use this library you must require and instantiate TrueFix on both the agent **and** the device.
 
