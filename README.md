@@ -113,4 +113,4 @@ imp.wakeup(1.0, function() {
 
 ## License
 
-The Truefix library is copyright &copy; 2016, Skyhook. It is released under the [MIT licence](https://github.com/electricimp/TrueFix/blob/master/LICENSE).
+The Skyhook Precision Location for IoT library is copyright &copy; 2016, Skyhook. It is released under the [MIT licence](https://github.com/electricimp/TrueFix/blob/master/LICENSE).
