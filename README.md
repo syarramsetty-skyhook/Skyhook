@@ -2,7 +2,7 @@
 
 [Skyhook’s Precision Location for IoT](http://www.skyhookwireless.com/Iot) product is the location layer for IoT devices within multiple platforms. This location solution was designed for all connected devices that need to minimize bandwidth and power consumption. To support all connected devices, we’ve maintained [Precision Location](http://www.skyhookwireless.com/products/precision-location) functionality while reducing client code by 100X and data transmission by 10X, making this the lightest location solution for IoT in the market today. 
 
-Please Note: for Version 1.0.0, Skyhook’s Precision Location for IoT is referred to as “TrueFix” in the code.
+Please Note: for Version 1.0.1, Skyhook’s Precision Location for IoT is referred to as “TrueFix” in the code.
 
 To use this library you must require and instantiate TrueFix on both the agent **and** the device.
 
