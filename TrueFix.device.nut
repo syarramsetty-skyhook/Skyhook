@@ -4,10 +4,10 @@
  *
  * @author Satya Yarramsetty <satya.yarramsetty@trueposition.com>
  *
- * @version 1.0.0
+ * @version 1.0.1
  */
 class TrueFix {
-  static version = [1, 0, 0];
+  static version = [1, 0, 1];
 
   static REQUEST_TAG = "truefix.wifiscan.request";
   static RESPONSE_TAG = "truefix.wifiscan.response";

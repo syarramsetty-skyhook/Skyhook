@@ -4,11 +4,11 @@
  *
  * @author Satya Yarramsetty <satya.yarramsetty@trueposition.com>
  *
- * @version 1.0.0
+ * @version 1.0.1
  */
 
 class TrueFix {
-  static version = [1, 0, 0];
+  static version = [1, 0, 1];
 
   static REQUEST_TAG = "truefix.wifiscan.request";
   static RESPONSE_TAG = "truefix.wifiscan.response";
@@ -53,7 +53,7 @@ class TrueFix {
       }
 
       local msg = "<?xml version='1.0' encoding='UTF-8'?>";
-      msg = msg + "<LocationRQ xmlns='http://trueposition.com/truefix' version='2.21' street-address-lookup='none' profiling='true'>";
+      msg = msg + "<LocationRQ xmlns='http://skyhookwireless.com/wps/2005' version='2.21' street-address-lookup='none' profiling='true'>";
       msg = msg + "<authentication version='2.2'>"
       msg = msg + format("<key key='%s' username='%s'/>", truefixKey, deviceName);
       msg = msg + "</authentication>";

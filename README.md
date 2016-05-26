@@ -4,7 +4,7 @@ The TrueFix library allows you to easily integrate [Skyhook’s TrueFix® Precis
 
 To use this library you must require and instantiate TrueFix on both the agent **and** the device.
 
-**To add this library to your project, add** `#require "TrueFix.device.nut:1.0.0"` **to the top of your device code, and** `#require "TrueFix.agent.nut:1.0.0"` **to the top of your agent code.**
+**To add this library to your project, add** `#require "TrueFix.device.nut:1.0.1"` **to the top of your device code, and** `#require "TrueFix.agent.nut:1.0.1"` **to the top of your agent code.**
 
 ## Device Class Usage
 
@@ -13,7 +13,7 @@ To use this library you must require and instantiate TrueFix on both the agent *
 The device side TrueFix constructor takes no parameters.
 
 ```squirrel
-#require "TrueFix.device.nut:1.0.0"
+#require "TrueFix.device.nut:1.0.1"
 
 trueFixDevice <- TrueFix();
 ```
@@ -37,7 +37,7 @@ trueFixDevice.register();
 The agent side TrueFix constructor takes three required parameters: the device name, your TrueFix Key and the TrueFix Location Platform URL. All parameters are strings. To get your TrueFix Key and Location Platform URL please contact [Skyhook](http://www.skyhookwireless.com/try-skyhook-for-free).
 
 ```squirrel
-#require "TrueFix.agent.nut:1.0.0"
+#require "TrueFix.agent.nut:1.0.1"
 
 const DEV_NAME = "tf-imp-1";
 const TRUEFIX_KEY = "<YOUR_TRUEFIX_KEY_FROM_SKYHOOK_DOT_COM>";
@@ -70,7 +70,7 @@ trueFixAgent.get_location(function(err, result) {
 ### Device Code
 
 ```
-#require "TrueFix.device.nut:1.0.0";
+#require "TrueFix.device.nut:1.0.1";
 
 tfDevApi <- TrueFix();
 tfDevApi.register();
@@ -79,7 +79,7 @@ tfDevApi.register();
 ### Agent Code
 
 ```
-#require "TrueFix.agent.nut:1.0.0";
+#require "TrueFix.agent.nut:1.0.1";
 
 // Device name
 const tfDevName = "tf-imp-1";
@@ -98,7 +98,7 @@ function getMyDeviceLocation(err, fix) {
         server.error(err);
     } else {
         server.log("Device location: " + fix.longitude + ", " + fix.latitude);
-        server.log("Location accuracy: " + fix.accuracy);    
+        server.log("Location accuracy: " + fix.accuracy);
     }
 }
 
