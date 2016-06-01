@@ -1,38 +1,38 @@
 /**
  * This class can be used on ElectricImp cloud to get location of ElectricImp
- * enabled device using TrueFix Location Platform.
+ * enabled device using Skyhook Precision Location Platform.
  *
  * @author Satya Yarramsetty <satya.yarramsetty@trueposition.com>
  *
- * @version 1.0.1
+ * @version 1.0.0
  */
 
-class TrueFix {
-  static version = [1, 0, 1];
+class SPL {
+  static version = [1, 0, 0];
 
-  static REQUEST_TAG = "truefix.wifiscan.request";
-  static RESPONSE_TAG = "truefix.wifiscan.response";
+  static REQUEST_TAG = "spl.wifiscan.request";
+  static RESPONSE_TAG = "spl.wifiscan.response";
 
   static ERROR_NO_ACCESS_POINTS = "no wifi access points";
-  static ERROR_UNSUCCESSFUL_RESPONSE = "unsuccessful response from truefix server";
+  static ERROR_UNSUCCESSFUL_RESPONSE = "unsuccessful response from Skyhook Precision Location server";
 
   deviceName = null;
-  truefixKey = null
-  truefixUrl = null;
+  splKey = null
+  splUrl = null;
 
   /**
    * @param {string} devicename
-   * @param {string} tfkey
-   * @param {string} tfUrl
+   * @param {string} splkey
+   * @param {string} splurl
    */
-  constructor(devicename, tfkey, tfurl) {
+  constructor(devicename, splkey, splurl) {
     deviceName = devicename;
-    truefixKey = tfkey;
-    truefixUrl = tfurl;
+    splKey = splkey;
+    splUrl = splurl;
   }
 
   /**
-   * Get location from TrueFix
+   * Get location from Skyhook Precision Location
    *
    * @param {function} callback
    *
@@ -55,7 +55,7 @@ class TrueFix {
       local msg = "<?xml version='1.0' encoding='UTF-8'?>";
       msg = msg + "<LocationRQ xmlns='http://skyhookwireless.com/wps/2005' version='2.21' street-address-lookup='none' profiling='true'>";
       msg = msg + "<authentication version='2.2'>"
-      msg = msg + format("<key key='%s' username='%s'/>", truefixKey, deviceName);
+      msg = msg + format("<key key='%s' username='%s'/>", splKey, deviceName);
       msg = msg + "</authentication>";
 
       foreach (ap in wlans) {
@@ -69,7 +69,7 @@ class TrueFix {
       msg = msg + "</LocationRQ>";
 
       local headers = { "Content-Type" : "text/xml" };
-      local request = http.post(truefixUrl, headers, msg);
+      local request = http.post(splUrl, headers, msg);
       request.sendasync(function(response) {
         if (response.statuscode == 200) {
           local fix = {latitude = null, longitude = null, accuracy = null};

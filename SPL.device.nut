@@ -1,16 +1,16 @@
 /**
  * This class is required on ElectricImp enabled device to provide
- * wifiscan results to TrueFixAgentApi running in ElectricImp cloud.
+ * wifiscan results to SPLAgentApi running in ElectricImp cloud.
  *
  * @author Satya Yarramsetty <satya.yarramsetty@trueposition.com>
  *
- * @version 1.0.1
+ * @version 1.0.0
  */
-class TrueFix {
-  static version = [1, 0, 1];
+class SPL {
+  static version = [1, 0, 0];
 
-  static REQUEST_TAG = "truefix.wifiscan.request";
-  static RESPONSE_TAG = "truefix.wifiscan.response";
+  static REQUEST_TAG = "spl.wifiscan.request";
+  static RESPONSE_TAG = "spl.wifiscan.response";
 
   constructor() {}
 
