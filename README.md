@@ -40,7 +40,7 @@ The agent side SPL constructor takes three required parameters: the device name,
 #require "SPL.agent.nut:1.0.0"
 
 const DEV_NAME = "spl-imp-1";
-const SPL_KEY = "<YOUR_SPL_KEY_KEY_FROM_SKYHOOK_DOT_COM>";
+const SPL_KEY = "<YOUR_SPL_KEY_FROM_SKYHOOK_DOT_COM>";
 const SPL_URL = "<Contact Skyhook to get skyhookUrl>";
 
 splAgent <- SPL(DEV_NAME, SPL_KEY, SPL_URL);
@@ -88,7 +88,7 @@ const splDevName = "spl-imp-1";
 const splKey = "Skyhook-Key-From-Skyhook-Dot-Com";
 
 // Skyhook Precision Location URL
-const splUrl = "https://trueposition.truefix.com/location";
+const splUrl = "Location-Url-From-Skyhook>";
 
 // Create Skyhook Precision Location instance
 splAgentApi <- SPL(splDevName, splKey, splUrl);
