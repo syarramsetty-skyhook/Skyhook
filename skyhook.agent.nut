@@ -7,28 +7,28 @@
  * @version 1.0.0
  */
 
-class SPL {
+class skyhook {
   static version = [1, 0, 0];
 
-  static REQUEST_TAG = "spl.wifiscan.request";
-  static RESPONSE_TAG = "spl.wifiscan.response";
+  static REQUEST_TAG = "skyhook.wifiscan.request";
+  static RESPONSE_TAG = "skyhook.wifiscan.response";
 
   static ERROR_NO_ACCESS_POINTS = "no wifi access points";
   static ERROR_UNSUCCESSFUL_RESPONSE = "unsuccessful response from Skyhook Precision Location server";
 
   deviceName = null;
-  splKey = null
-  splUrl = null;
+  skyhookKey = null
+  skyhookUrl = null;
 
   /**
    * @param {string} devicename
-   * @param {string} splkey
-   * @param {string} splurl
+   * @param {string} skyhookkey
+   * @param {string} skyhookurl
    */
-  constructor(devicename, splkey, splurl) {
+  constructor(devicename, skyhookkey, skyhookurl) {
     deviceName = devicename;
-    splKey = splkey;
-    splUrl = splurl;
+    skyhookKey = skyhookkey;
+    skyhookUrl = skyhookurl;
   }
 
   /**
@@ -55,7 +55,7 @@ class SPL {
       local msg = "<?xml version='1.0' encoding='UTF-8'?>";
       msg = msg + "<LocationRQ xmlns='http://skyhookwireless.com/wps/2005' version='2.21' street-address-lookup='none' profiling='true'>";
       msg = msg + "<authentication version='2.2'>"
-      msg = msg + format("<key key='%s' username='%s'/>", splKey, deviceName);
+      msg = msg + format("<key key='%s' username='%s'/>", skyhookKey, deviceName);
       msg = msg + "</authentication>";
 
       foreach (ap in wlans) {
@@ -69,7 +69,7 @@ class SPL {
       msg = msg + "</LocationRQ>";
 
       local headers = { "Content-Type" : "text/xml" };
-      local request = http.post(splUrl, headers, msg);
+      local request = http.post(skyhookUrl, headers, msg);
       request.sendasync(function(response) {
         if (response.statuscode == 200) {
           local fix = {latitude = null, longitude = null, accuracy = null};

@@ -4,18 +4,18 @@
 
 To use this library you must require and instantiate Skyhook Precision Location on both the agent **and** the device.
 
-**To add this library to your project, add** `#require "SPL.device.nut:1.0.0"` **to the top of your device code, and** `#require "SPL.agent.nut:1.0.0"` **to the top of your agent code.**
+**To add this library to your project, add** `#require "skyhook.device.nut:1.0.0"` **to the top of your device code, and** `#require "skyhook.agent.nut:1.0.0"` **to the top of your agent code.**
 
 ## Device Class Usage
 
-### Constructor: SPL()
+### Constructor: skyhook()
 
-The device side SPL constructor takes no parameters.
+The device side skyhook constructor takes no parameters.
 
 ```squirrel
-#require "SPL.device.nut:1.0.0"
+#require "skyhook.device.nut:1.0.0"
 
-splDevice <- SPL();
+skyhookDevice <- skyhook();
 ```
 
 ## Device Class Methods
@@ -25,25 +25,25 @@ splDevice <- SPL();
 The *register()* method opens a listener for location requests from the agent. When a request is received, the device scans the WiFi networks and sends the result back to the agent.
 
 ```squirrel
-splDevice.register();
+skyhookDevice.register();
 ```
 
 ## Agent Class Usage
 
-**Note** The SPL agent library code expects the device side library to be instantiated.
+**Note** The skyhook agent library code expects the device side library to be instantiated.
 
-### Constructor: SPL(*deviceName, splKey, splUrl*)
+### Constructor: skyhook(*deviceName, skyhookKey, skyhookUrl*)
 
-The agent side SPL constructor takes three required parameters: the device name, your Skyhook Precision Location Key and the Skyhook Precision Location Platform URL. All parameters are strings. To get your Skyhook Precision Location Key and Location Platform URL please contact [Skyhook](http://www.skyhookwireless.com/try-skyhook-for-free).
+The agent side skyhook constructor takes three required parameters: the device name, your Skyhook Precision Location Key and the Skyhook Precision Location Platform URL. All parameters are strings. To get your Skyhook Precision Location Key and Location Platform URL please contact [Skyhook](http://www.skyhookwireless.com/try-skyhook-for-free).
 
 ```squirrel
-#require "SPL.agent.nut:1.0.0"
+#require "skyhook.agent.nut:1.0.0"
 
-const DEV_NAME = "spl-imp-1";
-const SPL_KEY = "<YOUR_SPL_KEY_FROM_SKYHOOK_DOT_COM>";
-const SPL_URL = "<CONTACT_SKYHOOK_FOR_LOCATION_URL>";
+const DEV_NAME = "skyhook-imp-1";
+const SKYHOOK_KEY = "<YOUR_SKYHOOK_KEY_FROM_SKYHOOK_DOT_COM>";
+const SKYHOOK_URL = "<CONTACT_SKYHOOK_FOR_LOCATION_URL>";
 
-splAgent <- SPL(DEV_NAME, SPL_KEY, SPL_URL);
+skyhookAgent <- skyhook(DEV_NAME, SKYHOOK_KEY, SKYHOOK_URL);
 ```
 
 ## Agent Class Methods
@@ -55,7 +55,7 @@ The *get_location()* method takes one required parameter: a callback function. T
 The callback takes two required parameters: *err* and *result*. If no errors were encountered, *err* will be null and *result* will contain a table with the keys *latitude*, *longitude* and *accuracy*. If an error occured during the request, *err* will contain the error information and *result* will be null or the raw response from Skyhook.
 
 ```squirrel
-splAgent.get_location(function(err, result) {
+skyhookAgent.get_location(function(err, result) {
     if (err) {
         server.error(err);
     } else {
@@ -70,28 +70,28 @@ splAgent.get_location(function(err, result) {
 ### Device Code
 
 ```
-#require "SPL.device.nut:1.0.0"
+#require "skyhook.device.nut:1.0.0"
 
-splDevApi <- SPL();
-splDevApi.register();
+skyhookDevApi <- skyhook();
+skyhookDevApi.register();
 ```
 
 ### Agent Code
 
 ```
-#require "SPL.agent.nut:1.0.0";
+#require "skyhook.agent.nut:1.0.0";
 
 // Device name
-const splDevName = "spl-imp-1";
+const skyhookDevName = "skyhook-imp-1";
 
 // Skyhook Precision Location auth key
-const splKey = "Skyhook-Key-From-Skyhook-Dot-Com";
+const skyhookKey = "Skyhook-Key-From-Skyhook-Dot-Com";
 
 // Skyhook Precision Location URL
-const splUrl = "Location-Url-From-Skyhook>";
+const skyhookUrl = "Location-Url-From-Skyhook>";
 
 // Create Skyhook Precision Location instance
-splAgentApi <- SPL(splDevName, splKey, splUrl);
+skyhookAgentApi <- skyhook(skyhookDevName, skyhookKey, skyhookUrl);
 
 function getMyDeviceLocation(err, location) {
     if (err) {
@@ -105,7 +105,7 @@ function getMyDeviceLocation(err, location) {
 // Wait for device to come online then get location
 imp.wakeup(1.0, function() {
     server.log("Getting location");
-    splAgentApi.get_location(getMyDeviceLocation);
+    skyhookAgentApi.get_location(getMyDeviceLocation);
 })
 ```
 

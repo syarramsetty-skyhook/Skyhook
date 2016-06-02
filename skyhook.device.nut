@@ -1,16 +1,16 @@
 /**
  * This class is required on ElectricImp enabled device to provide
- * wifiscan results to SPLAgentApi running in ElectricImp cloud.
+ * wifiscan results to skyhookAgentApi running in ElectricImp cloud.
  *
  * @author Satya Yarramsetty <satya.yarramsetty@trueposition.com>
  *
  * @version 1.0.0
  */
-class SPL {
+class skyhook {
   static version = [1, 0, 0];
 
-  static REQUEST_TAG = "spl.wifiscan.request";
-  static RESPONSE_TAG = "spl.wifiscan.response";
+  static REQUEST_TAG = "skyhook.wifiscan.request";
+  static RESPONSE_TAG = "skyhook.wifiscan.response";
 
   constructor() {}
 
