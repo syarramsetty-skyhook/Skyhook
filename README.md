@@ -41,7 +41,7 @@ The agent side SPL constructor takes three required parameters: the device name,
 
 const DEV_NAME = "spl-imp-1";
 const SPL_KEY = "<YOUR_SPL_KEY_FROM_SKYHOOK_DOT_COM>";
-const SPL_URL = "<Contact Skyhook to get skyhookUrl>";
+const SPL_URL = "<CONTACT_SKYHOOK_FOR_LOCATION_URL>";
 
 splAgent <- SPL(DEV_NAME, SPL_KEY, SPL_URL);
 ```
