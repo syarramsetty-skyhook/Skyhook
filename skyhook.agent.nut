@@ -4,11 +4,11 @@
  *
  * @author Satya Yarramsetty <satya.yarramsetty@trueposition.com>
  *
- * @version 1.0.0
+ * @version 1.0.1
  */
 
 class skyhook {
-  static version = [1, 0, 0];
+  static version = [1, 0, 1];
 
   static REQUEST_TAG = "skyhook.wifiscan.request";
   static RESPONSE_TAG = "skyhook.wifiscan.response";
@@ -16,19 +16,15 @@ class skyhook {
   static ERROR_NO_ACCESS_POINTS = "no wifi access points";
   static ERROR_UNSUCCESSFUL_RESPONSE = "unsuccessful response from Skyhook Precision Location server";
 
-  deviceName = null;
+  static SKYHOOK_LOCATION_URL = "https://api.skyhookwireless.com/wps2/location"; 
+
   skyhookKey = null
-  skyhookUrl = null;
 
   /**
-   * @param {string} devicename
    * @param {string} skyhookkey
-   * @param {string} skyhookurl
    */
-  constructor(devicename, skyhookkey, skyhookurl) {
-    deviceName = devicename;
+  constructor(skyhookkey) {
     skyhookKey = skyhookkey;
-    skyhookUrl = skyhookurl;
   }
 
   /**
@@ -50,12 +46,13 @@ class skyhook {
   function _get_fix(wlans, callback) {
       if (wlans.len() < 1) {
         callback(ERROR_NO_ACCESS_POINTS, null);
+        return;
       }
 
       local msg = "<?xml version='1.0' encoding='UTF-8'?>";
       msg = msg + "<LocationRQ xmlns='http://skyhookwireless.com/wps/2005' version='2.21' street-address-lookup='none' profiling='true'>";
       msg = msg + "<authentication version='2.2'>"
-      msg = msg + format("<key key='%s' username='%s'/>", skyhookKey, deviceName);
+      msg = msg + format("<key key='%s' username='%s'/>", skyhookKey, imp.configparams.deviceid);
       msg = msg + "</authentication>";
 
       foreach (ap in wlans) {
@@ -68,8 +65,9 @@ class skyhook {
       }
       msg = msg + "</LocationRQ>";
 
-      local headers = { "Content-Type" : "text/xml" };
-      local request = http.post(skyhookUrl, headers, msg);
+      // FIXME: I really want to get public ip of device from agent. But how?
+      local headers = { "Content-Type" : "text/xml", "X-Forwarded-For" : "127.0.0.1" };
+      local request = http.post(SKYHOOK_LOCATION_URL, headers, msg);
       request.sendasync(function(response) {
         if (response.statuscode == 200) {
           local fix = {latitude = null, longitude = null, accuracy = null};

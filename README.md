@@ -4,7 +4,7 @@
 
 To use this library you must require and instantiate Skyhook Precision Location on both the agent **and** the device.
 
-**To add this library to your project, add** `#require "skyhook.device.nut:1.0.0"` **to the top of your device code, and** `#require "skyhook.agent.nut:1.0.0"` **to the top of your agent code.**
+**To add this library to your project, add** `#require "skyhook.device.nut:1.0.1"` **to the top of your device code, and** `#require "skyhook.agent.nut:1.0.1"` **to the top of your agent code.**
 
 ## Device Class Usage
 
@@ -13,7 +13,7 @@ To use this library you must require and instantiate Skyhook Precision Location 
 The device side skyhook constructor takes no parameters.
 
 ```squirrel
-#require "skyhook.device.nut:1.0.0"
+#require "skyhook.device.nut:1.0.1"
 
 skyhookDevice <- skyhook();
 ```
@@ -37,13 +37,11 @@ skyhookDevice.register();
 The agent side skyhook constructor takes three required parameters: the device name, your Skyhook Precision Location Key and the Skyhook Precision Location Platform URL. All parameters are strings. To get your Skyhook Precision Location Key and Location Platform URL please contact [Skyhook](http://www.skyhookwireless.com/try-skyhook-for-free).
 
 ```squirrel
-#require "skyhook.agent.nut:1.0.0"
+#require "skyhook.agent.nut:1.0.1"
 
-const DEV_NAME = "skyhook-imp-1";
 const SKYHOOK_KEY = "<YOUR_SKYHOOK_KEY_FROM_SKYHOOK_DOT_COM>";
-const SKYHOOK_URL = "<CONTACT_SKYHOOK_FOR_LOCATION_URL>";
 
-skyhookAgent <- skyhook(DEV_NAME, SKYHOOK_KEY, SKYHOOK_URL);
+skyhookAgent <- skyhook(SKYHOOK_KEY);
 ```
 
 ## Agent Class Methods
@@ -70,7 +68,7 @@ skyhookAgent.get_location(function(err, result) {
 ### Device Code
 
 ```
-#require "skyhook.device.nut:1.0.0"
+#require "skyhook.device.nut:1.0.1"
 
 skyhookDevApi <- skyhook();
 skyhookDevApi.register();
@@ -79,21 +77,15 @@ skyhookDevApi.register();
 ### Agent Code
 
 ```
-#require "skyhook.agent.nut:1.0.0";
-
-// Device name
-const skyhookDevName = "skyhook-imp-1";
+#require "skyhook.agent.nut:1.0.1";
 
 // Skyhook Precision Location auth key
 const skyhookKey = "Skyhook-Key-From-Skyhook-Dot-Com";
 
-// Skyhook Precision Location URL
-const skyhookUrl = "Location-Url-From-Skyhook>";
-
 // Create Skyhook Precision Location instance
-skyhookAgentApi <- skyhook(skyhookDevName, skyhookKey, skyhookUrl);
+skyhookAgentApi <- skyhook(skyhookKey);
 
-function getMyDeviceLocation(err, location) {
+function device_location(err, location) {
     if (err) {
         server.error(err);
     } else {
@@ -105,7 +97,7 @@ function getMyDeviceLocation(err, location) {
 // Wait for device to come online then get location
 imp.wakeup(1.0, function() {
     server.log("Getting location");
-    skyhookAgentApi.get_location(getMyDeviceLocation);
+    skyhookAgentApi.get_location(device_location);
 })
 ```
 
