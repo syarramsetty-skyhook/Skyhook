@@ -4,7 +4,7 @@
 
 To use this library you must require and instantiate Skyhook Precision Location on both the agent **and** the device.
 
-**To add this library to your project, add** `#require "skyhook.device.nut:1.0.0"` **to the top of your device code, and** `#require "skyhook.agent.nut:1.0.0"` **to the top of your agent code.**
+**To add this library to your project, add** `#require "skyhook.device.nut:2.0.0"` **to the top of your device code, and** `#require "skyhook.agent.nut:2.0.0"` **to the top of your agent code.**
 
 ## Device Class Usage
 
@@ -13,9 +13,9 @@ To use this library you must require and instantiate Skyhook Precision Location 
 The device side skyhook constructor takes no parameters.
 
 ```squirrel
-#require "skyhook.device.nut:1.0.0"
+#require "skyhook.device.nut:2.0.0"
 
-skyhookDevice <- skyhook();
+skyhookDevice <- Skyhook();
 ```
 
 ## Device Class Methods
@@ -37,25 +37,23 @@ skyhookDevice.register();
 The agent side skyhook constructor takes three required parameters: the device name, your Skyhook Precision Location Key and the Skyhook Precision Location Platform URL. All parameters are strings. To get your Skyhook Precision Location Key and Location Platform URL please contact [Skyhook](http://www.skyhookwireless.com/try-skyhook-for-free).
 
 ```squirrel
-#require "skyhook.agent.nut:1.0.0"
+#require "skyhook.agent.nut:2.0.0"
 
-const DEV_NAME = "skyhook-imp-1";
 const SKYHOOK_KEY = "<YOUR_SKYHOOK_KEY_FROM_SKYHOOK_DOT_COM>";
-const SKYHOOK_URL = "<CONTACT_SKYHOOK_FOR_LOCATION_URL>";
 
-skyhookAgent <- skyhook(DEV_NAME, SKYHOOK_KEY, SKYHOOK_URL);
+skyhookAgent <- Skyhook(SKYHOOK_KEY);
 ```
 
 ## Agent Class Methods
 
-### get_location(*callback*)
+### getLocation(*callback*)
 
-The *get_location()* method takes one required parameter: a callback function. The method triggers a WiFi scan on the device then sends the results to Skyhook. Skyhook returns the device’s location and passes the results to the callback.
+The *getLocation()* method takes one required parameter: a callback function. The method triggers a WiFi scan on the device then sends the results to Skyhook. Skyhook returns the device’s location and passes the results to the callback.
 
 The callback takes two required parameters: *err* and *result*. If no errors were encountered, *err* will be null and *result* will contain a table with the keys *latitude*, *longitude* and *accuracy*. If an error occured during the request, *err* will contain the error information and *result* will be null or the raw response from Skyhook.
 
 ```squirrel
-skyhookAgent.get_location(function(err, result) {
+skyhookAgent.getLocation(function(err, result) {
     if (err) {
         server.error(err);
     } else {
@@ -70,30 +68,24 @@ skyhookAgent.get_location(function(err, result) {
 ### Device Code
 
 ```
-#require "skyhook.device.nut:1.0.0"
+#require "skyhook.device.nut:2.0.0"
 
-skyhookDevApi <- skyhook();
+skyhookDevApi <- Skyhook();
 skyhookDevApi.register();
 ```
 
 ### Agent Code
 
 ```
-#require "skyhook.agent.nut:1.0.0";
-
-// Device name
-const skyhookDevName = "skyhook-imp-1";
+#require "skyhook.agent.nut:2.0.0";
 
 // Skyhook Precision Location auth key
 const skyhookKey = "Skyhook-Key-From-Skyhook-Dot-Com";
 
-// Skyhook Precision Location URL
-const skyhookUrl = "Location-Url-From-Skyhook>";
-
 // Create Skyhook Precision Location instance
-skyhookAgentApi <- skyhook(skyhookDevName, skyhookKey, skyhookUrl);
+skyhookAgentApi <- Skyhook(skyhookKey);
 
-function getMyDeviceLocation(err, location) {
+function deviceLocation(err, location) {
     if (err) {
         server.error(err);
     } else {
@@ -105,7 +97,7 @@ function getMyDeviceLocation(err, location) {
 // Wait for device to come online then get location
 imp.wakeup(1.0, function() {
     server.log("Getting location");
-    skyhookAgentApi.get_location(getMyDeviceLocation);
+    skyhookAgentApi.getLocation(deviceLocation);
 })
 ```
 
