@@ -4,11 +4,11 @@
  *
  * @author Satya Yarramsetty <satya.yarramsetty@trueposition.com>
  *
- * @version 1.0.1
+ * @version 2.0.0
  */
 
 class skyhook {
-  static version = [1, 0, 1];
+  static VERSION = "2.0.0";
 
   static REQUEST_TAG = "skyhook.wifiscan.request";
   static RESPONSE_TAG = "skyhook.wifiscan.response";
@@ -65,7 +65,6 @@ class skyhook {
       }
       msg = msg + "</LocationRQ>";
 
-      // FIXME: I really want to get public ip of device from agent. But how?
       local headers = { "Content-Type" : "text/xml", "X-Forwarded-For" : "127.0.0.1" };
       local request = http.post(SKYHOOK_LOCATION_URL, headers, msg);
       request.sendasync(function(response) {
