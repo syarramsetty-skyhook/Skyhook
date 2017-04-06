@@ -15,7 +15,7 @@ The device side skyhook constructor takes no parameters.
 ```squirrel
 #require "skyhook.device.nut:2.0.0"
 
-skyhookDevice <- skyhook();
+skyhookDevice <- Skyhook();
 ```
 
 ## Device Class Methods
@@ -41,19 +41,19 @@ The agent side skyhook constructor takes three required parameters: the device n
 
 const SKYHOOK_KEY = "<YOUR_SKYHOOK_KEY_FROM_SKYHOOK_DOT_COM>";
 
-skyhookAgent <- skyhook(SKYHOOK_KEY);
+skyhookAgent <- Skyhook(SKYHOOK_KEY);
 ```
 
 ## Agent Class Methods
 
-### get_location(*callback*)
+### getLocation(*callback*)
 
-The *get_location()* method takes one required parameter: a callback function. The method triggers a WiFi scan on the device then sends the results to Skyhook. Skyhook returns the device’s location and passes the results to the callback.
+The *getLocation()* method takes one required parameter: a callback function. The method triggers a WiFi scan on the device then sends the results to Skyhook. Skyhook returns the device’s location and passes the results to the callback.
 
 The callback takes two required parameters: *err* and *result*. If no errors were encountered, *err* will be null and *result* will contain a table with the keys *latitude*, *longitude* and *accuracy*. If an error occured during the request, *err* will contain the error information and *result* will be null or the raw response from Skyhook.
 
 ```squirrel
-skyhookAgent.get_location(function(err, result) {
+skyhookAgent.getLocation(function(err, result) {
     if (err) {
         server.error(err);
     } else {
@@ -70,7 +70,7 @@ skyhookAgent.get_location(function(err, result) {
 ```
 #require "skyhook.device.nut:2.0.0"
 
-skyhookDevApi <- skyhook();
+skyhookDevApi <- Skyhook();
 skyhookDevApi.register();
 ```
 
@@ -83,9 +83,9 @@ skyhookDevApi.register();
 const skyhookKey = "Skyhook-Key-From-Skyhook-Dot-Com";
 
 // Create Skyhook Precision Location instance
-skyhookAgentApi <- skyhook(skyhookKey);
+skyhookAgentApi <- Skyhook(skyhookKey);
 
-function device_location(err, location) {
+function deviceLocation(err, location) {
     if (err) {
         server.error(err);
     } else {
@@ -97,7 +97,7 @@ function device_location(err, location) {
 // Wait for device to come online then get location
 imp.wakeup(1.0, function() {
     server.log("Getting location");
-    skyhookAgentApi.get_location(device_location);
+    skyhookAgentApi.getLocation(deviceLocation);
 })
 ```
 

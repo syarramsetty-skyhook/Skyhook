@@ -6,7 +6,7 @@
  *
  * @version 2.0.0
  */
-class skyhook {
+class Skyhook {
   static VERSION = "2.0.0";
 
   static REQUEST_TAG = "skyhook.wifiscan.request";

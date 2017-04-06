@@ -7,7 +7,7 @@
  * @version 2.0.0
  */
 
-class skyhook {
+class Skyhook {
   static VERSION = "2.0.0";
 
   static REQUEST_TAG = "skyhook.wifiscan.request";
@@ -18,13 +18,13 @@ class skyhook {
 
   static SKYHOOK_LOCATION_URL = "https://api.skyhookwireless.com/wps2/location"; 
 
-  skyhookKey = null
+  _skyhookKey = null
 
   /**
    * @param {string} skyhookkey
    */
-  constructor(skyhookkey) {
-    skyhookKey = skyhookkey;
+  constructor(key) {
+    _skyhookKey = key;
   }
 
   /**
@@ -34,16 +34,16 @@ class skyhook {
    *
    * @return null
    */
-  function get_location(callback) {
+  function getLocation(callback) {
     device.on(RESPONSE_TAG, function(wlans) {
-        _get_fix(wlans, callback);
+        _getFix(wlans, callback);
     }.bindenv(this));
 
     device.send(REQUEST_TAG, null);
   }
 
-  // private function
-  function _get_fix(wlans, callback) {
+  // ----- PRIVATE METHODS ----------- //
+  function _getFix(wlans, callback) {
       if (wlans.len() < 1) {
         callback(ERROR_NO_ACCESS_POINTS, null);
         return;
