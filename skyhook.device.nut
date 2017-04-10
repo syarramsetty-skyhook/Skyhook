@@ -4,10 +4,10 @@
  *
  * @author Satya Yarramsetty <satya.yarramsetty@trueposition.com>
  *
- * @version 1.0.0
+ * @version 2.0.0
  */
-class skyhook {
-  static version = [1, 0, 0];
+class Skyhook {
+  static VERSION = "2.0.0";
 
   static REQUEST_TAG = "skyhook.wifiscan.request";
   static RESPONSE_TAG = "skyhook.wifiscan.response";
