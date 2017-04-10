@@ -50,7 +50,7 @@ skyhookAgent <- Skyhook(configSKYHOOK_KEY);
 
 The *getLocation()* method takes one required parameter: a callback function. The method triggers a WiFi scan on the device then sends the results to Skyhook. Skyhook returns the device’s location and passes the results to the callback.
 
-The callback takes two required parameters: *err* and *result*. If no errors were encountered, *err* will be null and *result* will contain a table with the keys *latitude*, *longitude* and *accuracy*. If an error occured during the request, *err* will contain the error information and *result* will be `null` or the raw response from Skyhook.
+The callback takes two required parameters: *err* and *result*. If no errors were encountered, *err* will be null and *result* will contain a table with the keys *latitude*, *longitude* and *accuracy*. If an error occurred during the request, *err* will contain the error information and *result* will be `null` or the raw response from Skyhook.
 
 ```squirrel
 skyhookAgent.getLocation(function(err, result) {
