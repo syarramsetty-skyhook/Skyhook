@@ -52,7 +52,7 @@ class Skyhook {
       local msg = "<?xml version='1.0' encoding='UTF-8'?>";
       msg = msg + "<LocationRQ xmlns='http://skyhookwireless.com/wps/2005' version='2.21' street-address-lookup='none' profiling='true'>";
       msg = msg + "<authentication version='2.2'>"
-      msg = msg + format("<key key='%s' username='%s'/>", skyhookKey, imp.configparams.deviceid);
+      msg = msg + format("<key key='%s' username='%s'/>", _skyhookKey, imp.configparams.deviceid);
       msg = msg + "</authentication>";
 
       foreach (ap in wlans) {
