@@ -4,7 +4,7 @@
 
 To use this library you must require and instantiate Skyhook Precision Location on both the agent **and** the device.
 
-**To add this library to your project, add** `#require "skyhook.device.nut:2.0.0"` **to the top of your device code, and** `#require "skyhook.agent.nut:2.0.0"` **to the top of your agent code.**
+**To add this library to your project, add** `#require "skyhook.device.nut:2.0.1"` **to the top of your device code, and** `#require "skyhook.agent.nut:2.0.1"` **to the top of your agent code.**
 
 ## Device Class Usage
 
@@ -13,7 +13,7 @@ To use this library you must require and instantiate Skyhook Precision Location 
 The device-side Skyhook constructor takes no parameters.
 
 ```squirrel
-#require "skyhook.device.nut:2.0.0"
+#require "skyhook.device.nut:2.0.1"
 
 skyhookDevice <- Skyhook();
 ```
@@ -37,7 +37,7 @@ skyhookDevice.register();
 The agent-side Skyhook constructor takes one, required parameter: your Skyhook Precision Location Key as a string. To get your Skyhook Precision Location Key, please contact [Skyhook](http://www.skyhookwireless.com/try-skyhook-for-free).
 
 ```squirrel
-#require "skyhook.agent.nut:2.0.0"
+#require "skyhook.agent.nut:2.0.1"
 
 const SKYHOOK_KEY = "<YOUR_SKYHOOK_KEY_FROM_SKYHOOK_DOT_COM>";
 
@@ -68,7 +68,7 @@ skyhookAgent.getLocation(function(err, result) {
 ### Device Code
 
 ```
-#require "skyhook.device.nut:2.0.0"
+#require "skyhook.device.nut:2.0.1"
 
 skyhookDev <- Skyhook();
 skyhookDev.register();
@@ -79,7 +79,7 @@ agent.send("ready", true);
 ### Agent Code
 
 ```
-#require "skyhook.agent.nut:2.0.0";
+#require "skyhook.agent.nut:2.0.1";
 
 // Skyhook Precision Location auth key
 const skyhookKey = "Skyhook-Key-From-Skyhook-Dot-Com";

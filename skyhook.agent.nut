@@ -4,11 +4,11 @@
  *
  * @author Satya Yarramsetty <satya.yarramsetty@trueposition.com>
  *
- * @version 2.0.0
+ * @version 2.0.1
  */
 
 class Skyhook {
-  static VERSION = "2.0.0";
+  static VERSION = "2.0.1";
 
   static REQUEST_TAG = "skyhook.wifiscan.request";
   static RESPONSE_TAG = "skyhook.wifiscan.response";
@@ -16,7 +16,7 @@ class Skyhook {
   static ERROR_NO_ACCESS_POINTS = "no wifi access points";
   static ERROR_UNSUCCESSFUL_RESPONSE = "unsuccessful response from Skyhook Precision Location server";
 
-  static SKYHOOK_LOCATION_URL = "https://api.skyhookwireless.com/wps2/location"; 
+  static SKYHOOK_LOCATION_URL = "https://api.skyhookwireless.com/wps2/location";
 
   _skyhookKey = null
 
